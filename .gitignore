@@ -1,0 +1,55 @@
+# Ignore build directories
+/build/
+/Debug/
+/Release/
+
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore compiled files
+*.o
+*.obj
+*.exe
+*.pdb
+
+# Ignore CMake generated files
+CMakeFiles/
+CMakeCache.txt
+*.cmake
+Makefile
+
+# Ignore Python bytecode and virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+
+# Ignore SQLiteCpp unnecessary files
+SQLiteCpp/.github/
+SQLiteCpp/cmake/
+SQLiteCpp/docs/
+SQLiteCpp/examples/
+SQLiteCpp/googletest/
+SQLiteCpp/subprojects/
+SQLiteCpp/tests/
+SQLiteCpp/.gitmodules
+SQLiteCpp/.editorconfig
+SQLiteCpp/.cproject
+SQLiteCpp/.project
+SQLiteCpp/.travis.yml
+SQLiteCpp/appveyor.yml
+SQLiteCpp/meson_options.txt
+SQLiteCpp/meson.build
+SQLiteCpp/package.xml
+SQLiteCpp/build.sh
+SQLiteCpp/build.bat
+
+# Ignore other temporary or log files
+*.log
+*.tmp
+*.bak
+
+# Ignore data files (optional if data files should not be versioned)
+data/*.csv
