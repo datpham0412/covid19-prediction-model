@@ -48,7 +48,7 @@ def main():
     print(merged_data.columns)
     
     # Save merged data to a CSV file for EDA
-    merged_data.to_csv('../data/merged_data.csv', index=False)
+    merged_data.to_csv('../data/merged_data_aus.csv', index=False)
     print("Merged data saved to '../data/merged_data.csv'")
 
 if __name__ == "__main__":
