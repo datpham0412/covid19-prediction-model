@@ -7,10 +7,11 @@
 class DataProcessor
 {
 private:
-    std::vector<std::vector<std::string>> data;
+    std::vector<std::vector<std::string>> covid_data;
+    std::vector<std::vector<std::string>> mobility_data;
 
 public:
-    void loadCSV(const std::string &fileName);
+    void loadCSV(const std::string &fileName, bool isMobility);
     void processData();
     void saveToDatabase(const std::string &db_fileName);
 };

@@ -3,75 +3,139 @@
 #include <fstream>
 #include <sstream>
 #include <SQLiteCpp/SQLiteCpp.h>
+#include <chrono>
+#include <vector>
+#include <stdexcept>
 
-void DataProcessor::loadCSV(const std::string &fileName)
+void DataProcessor::loadCSV(const std::string &fileName, bool isMobility)
 {
+    auto start = std::chrono::high_resolution_clock::now();
+
     std::ifstream file(fileName);
     if (!file.is_open())
     {
         throw std::runtime_error("Unable to open file " + fileName);
     }
+
     std::string line;
     std::getline(file, line);        // Skip the header
-    while (std::getline(file, line)) // Reads the first data line: "Afghanistan,2020-01-05,,,,0.0,0.0,,41128772.0"
+    while (std::getline(file, line)) // Read each data line
     {
         std::vector<std::string> row;
-        std::stringstream ss(line); // ss contains: "Afghanistan,2020-01-05,,,,0.0,0.0,,41128772.0"
+        std::stringstream ss(line);
         std::string value;
-        while (std::getline(ss, value, ',')) // Reads each value separated by commas
+        while (std::getline(ss, value, ','))
         {
-            row.push_back(value); // Add each value to the row vector
+            row.push_back(value);
         }
-        data.push_back(row); // Adds the row vector to the data vector
+
+        if (isMobility)
+        {
+            mobility_data.push_back(row);
+        }
+        else
+        {
+            covid_data.push_back(row);
+        }
     }
+
+    file.close();
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
+    std::cout << "Loaded " << (isMobility ? "mobility" : "covid") << " data in " << duration.count() << " seconds." << std::endl;
 }
 
 void DataProcessor::processData()
 {
+    auto start = std::chrono::high_resolution_clock::now();
+
     // Example: Process data, e.g., normalize values, handle missing data
-    for (auto &row : data)
+    for (auto &row : covid_data)
     {
         for (auto &value : row)
         {
-            // Perform some processing on each value
+            // Perform some processing on each value (currently a placeholder)
         }
     }
+    for (auto &row : mobility_data)
+    {
+        for (auto &value : row)
+        {
+            // Perform some processing on each value (currently a placeholder)
+        }
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
+    std::cout << "Processed data in " << duration.count() << " seconds." << std::endl;
 }
 
 void DataProcessor::saveToDatabase(const std::string &db_fileName)
 {
-    // Open or create a database file specified by db_fileName:
-    SQLite::Database db(db_fileName, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    auto start = std::chrono::high_resolution_clock::now();
 
-    // Drop the existing Data table if it exists
-    db.exec("DROP TABLE IF EXISTS Data");
-
-    // Create a new data table with the specified columns
-    db.exec("CREATE TABLE Data (id INTEGER PRIMARY KEY, location TEXT, date TEXT, total_cases REAL, total_deaths REAL, total_tests REAL, new_cases REAL, new_deaths REAL, new_tests REAL, population REAL)");
-
-    // Begin a transaction on the database:
-    SQLite::Transaction transaction(db);
-
-    // Iterate over each row in the data vector
-    for (const auto &row : data)
+    try
     {
-        // Prepare an SQL statement to insert a new row into the Data table
-        SQLite::Statement query(db, "INSERT INTO Data (location, date, total_cases, total_deaths, total_tests, new_cases, new_deaths, new_tests, population) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        // Open or create a database file specified by db_fileName
+        SQLite::Database db(db_fileName, SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
 
-        // Bind the values from row vector to the SQL statement
-        query.bind(1, row[0]); // Bind location
-        query.bind(2, row[1]); // Bind date
-        query.bind(3, row[2]); // Bind total_cases
-        query.bind(4, row[3]); // Bind total_deaths
-        query.bind(5, row[4]); // Bind total_tests
-        query.bind(6, row[5]); // Bind new_cases
-        query.bind(7, row[6]); // Bind new_deaths
-        query.bind(8, row[7]); // Bind new_tests
-        query.bind(9, row[8]); // Bind population
+        // Drop the existing CovidData table if it exists and create a new one
+        db.exec("DROP TABLE IF EXISTS CovidData");
+        db.exec("CREATE TABLE CovidData (id INTEGER PRIMARY KEY, location TEXT, date TEXT, total_cases REAL, total_deaths REAL, total_tests REAL, new_cases REAL, new_deaths REAL, new_tests REAL, population REAL)");
 
-        // Execute the prepared SQL statement to insert the new row into the database
-        query.exec();
+        // Drop the existing MobilityData table if it exists and create a new one
+        db.exec("DROP TABLE IF EXISTS MobilityData");
+        db.exec("CREATE TABLE MobilityData (id INTEGER PRIMARY KEY, country_region TEXT, sub_region_1 TEXT, sub_region_2 TEXT, date TEXT, retail_and_recreation REAL, grocery_and_pharmacy REAL, parks REAL, transit_stations REAL, workplaces REAL, residential REAL)");
+
+        // Begin a transaction to ensure data consistency
+        SQLite::Transaction transaction(db);
+
+        // Insert rows into the CovidData table
+        for (const auto &row : covid_data)
+        {
+            SQLite::Statement query(db, "INSERT INTO CovidData (location, date, total_cases, total_deaths, total_tests, new_cases, new_deaths, new_tests, population) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            query.bind(1, row[0]); // Bind location
+            query.bind(2, row[1]); // Bind date
+            query.bind(3, row[2]); // Bind total_cases
+            query.bind(4, row[3]); // Bind total_deaths
+            query.bind(5, row[4]); // Bind total_tests
+            query.bind(6, row[5]); // Bind new_cases
+            query.bind(7, row[6]); // Bind new_deaths
+            query.bind(8, row[7]); // Bind new_tests
+            query.bind(9, row[8]); // Bind population
+            query.exec();          // Execute the query to insert the row
+        }
+
+        // Insert rows into the MobilityData table
+        for (const auto &row : mobility_data)
+        {
+            if (row.size() > 14)
+            {
+                SQLite::Statement query(db, "INSERT INTO MobilityData (country_region, sub_region_1, sub_region_2, date, retail_and_recreation, grocery_and_pharmacy, parks, transit_stations, workplaces, residential) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                query.bind(1, row[1]);   // Bind country_region
+                query.bind(2, row[2]);   // Bind sub_region_1
+                query.bind(3, row[3]);   // Bind sub_region_2
+                query.bind(4, row[8]);   // Bind date (corrected index)
+                query.bind(5, row[9]);   // Bind retail_and_recreation
+                query.bind(6, row[10]);  // Bind grocery_and_pharmacy
+                query.bind(7, row[11]);  // Bind parks
+                query.bind(8, row[12]);  // Bind transit_stations
+                query.bind(9, row[13]);  // Bind workplaces
+                query.bind(10, row[14]); // Bind residential
+                query.exec();            // Execute the query to insert the row
+            }
+        }
+
+        // Commit the transaction to apply all changes to the database
+        transaction.commit();
+
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration = end - start;
+        std::cout << "Saved data to database in " << duration.count() << " seconds." << std::endl;
     }
-    // Commit the transaction to apply all changes to the database
-    transaction.commit();
+    catch (const std::exception &e)
+    {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
 }

@@ -6,7 +6,8 @@ int main()
     DataProcessor dp;
     try
     {
-        dp.loadCSV("../../data/covid_data.csv");
+        dp.loadCSV("../../data/covid_data1.csv", false);
+        dp.loadCSV("../../data/mobility_data1.csv", true);
         dp.processData();
         dp.saveToDatabase("../../data/processed_data.db");
     }
