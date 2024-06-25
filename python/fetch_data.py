@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import requests
 
@@ -17,12 +18,17 @@ def fetch_mobility_data():
     return df
 
 def main():
+    # Ensure the data directory exists
+    data_dir = '../data'
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+
     covid_data = fetch_covid_data()
     processed_covid_data = process_covid_data(covid_data)
-    processed_covid_data.to_csv('../data/covid_data.csv', index=False)
+    processed_covid_data.to_csv(os.path.join(data_dir, 'covid_data.csv'), index=False)
 
     mobility_data = fetch_mobility_data()
-    mobility_data.to_csv('../data/mobility_data.csv', index=False)
+    mobility_data.to_csv(os.path.join(data_dir, 'mobility_data.csv'), index=False)
 
 if __name__ == "__main__":
     main()
