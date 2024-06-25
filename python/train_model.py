@@ -3,6 +3,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
+from datetime import timedelta
+import numpy as np
 
 # Function to load data from the SQLite database
 def load_data(db_path):
@@ -25,12 +27,6 @@ def preprocess_data(covid_data, mobility_data):
     
     # Merge data on the date column
     merged_data = pd.merge(covid_data, mobility_data, left_on='date', right_on='date')
-    
-    # Debugging: Print the date columns to check for matching values
-    print("\nCovidData Dates:")
-    print(covid_data['date'].unique())
-    print("\nMobilityData Dates:")
-    print(mobility_data['date'].unique())
     
     # Drop rows with missing values
     merged_data.dropna(inplace=True)
@@ -57,6 +53,19 @@ def train_model(X, y):
     
     return model
 
+# Function to predict future values using Verhulst-Pearl Logistic Function
+def predict_future_verhulst_pearl(initial_cases, future_time, K, b, c):
+    return K / (1 + b * np.exp(-c * future_time))
+
+# Function to calculate the constants b and c
+def calculate_constants(cumulative_cases, K):
+    N0 = cumulative_cases.iloc[0]
+    N1 = cumulative_cases.iloc[1]
+    t0, t1 = 0, 1
+    b = (K / N0 - 1)
+    c = -np.log((K / N1 - 1) / b)
+    return b, c
+
 # Main function
 def main():
     db_path = '../data/processed_data.db'
@@ -66,7 +75,7 @@ def main():
     
     # Print the merged data table
     print("\nMerged Data Table:")
-    print(merged_data)
+    print(merged_data.head())
     
     # Feature selection for model training
     X = merged_data[['retail_and_recreation', 'grocery_and_pharmacy', 'parks', 'transit_stations', 'workplaces', 'residential']]
@@ -75,6 +84,23 @@ def main():
     model = train_model(X, y)
     
     print("Model training complete.")
+    
+    # Predict future values using Verhulst-Pearl Logistic Function
+    cumulative_cases = merged_data['total_cases']
+    K = cumulative_cases.max()
+    b, c = calculate_constants(cumulative_cases, K)
+    
+    print(f"Calculated constants: b = {b}, c = {c}")
+    
+    future_days = 14
+    predictions = []
+    for day in range(1, future_days + 1):
+        future_cases = predict_future_verhulst_pearl(cumulative_cases.iloc[-1], day, K, b, c)
+        predictions.append(future_cases)
+    
+    print("\nFuture Predictions (next 14 days):")
+    for i, pred in enumerate(predictions):
+        print(f"Day {i + 1}: {pred:.2f} cases")
 
 if __name__ == "__main__":
     main()
