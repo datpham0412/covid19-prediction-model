@@ -42,4 +42,4 @@ def perform_feature_engineering(filepath, save_path):
     data.to_csv(save_path, index=False)
 
 # Run the feature engineering process
-perform_feature_engineering('../data/merged_data.csv', 'feature_engineering_data.csv')
+perform_feature_engineering('../data/merged_data.csv', '../data/feature_engineering_data.csv')
