@@ -16,6 +16,9 @@ def create_date_features(data):
 
 # Function to create lag features
 def create_lag_features(data, lag_features):
+    # Fill missing or zero sub_region_2 with a placeholder value
+    data['sub_region_2'] = data['sub_region_2'].replace(0, 'unknown').fillna('unknown')
+    
     data = data.sort_values(by=['country_region', 'sub_region_1', 'sub_region_2', 'date'])
     grouped = data.groupby(['country_region', 'sub_region_1', 'sub_region_2'])
     for feature in lag_features:
