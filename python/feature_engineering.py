@@ -33,6 +33,12 @@ def create_rolling_averages(data, rolling_features, window):
         data[f'{feature}_{window}d_avg'] = grouped[feature].transform(lambda x: x.rolling(window, min_periods=1).mean())
     return data
 
+# Function to create per capita metrics
+def create_per_capita_metrics(data, features, population_feature):
+    for feature in features:
+        data[f'{feature}_per_capita'] = data[feature] / data[population_feature]
+    return data
+
 # Main function to perform the steps up to creating lag features
 def perform_feature_engineering(filepath, save_path):
     # Step 1: Load dataset
@@ -49,14 +55,16 @@ def perform_feature_engineering(filepath, save_path):
     rolling_features = ['new_cases', 'new_deaths', 'new_tests']
     window = 7
     data = create_rolling_averages(data, rolling_features, window)
+
+    # Step 5: Create per capita metrics
+    per_capita_features = ['total_cases', 'total_deaths', 'total_tests', 'new_cases', 'new_deaths', 'new_tests']
+    data = create_per_capita_metrics(data, per_capita_features, 'population')
     
     # Fill missing values for lag features
     data.fillna(0, inplace=True)
 
     # Save the processed data to a new CSV file
     data.to_csv(save_path, index=False)
-
-
 
 # Run the feature engineering process
 perform_feature_engineering('../data/merged_data.csv', '../data/feature_engineering_data.csv')
