@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
 
 # Function to load the dataset
 def load_dataset(filepath):
@@ -39,6 +41,20 @@ def create_per_capita_metrics(data, features, population_feature):
         data[f'{feature}_per_capita'] = data[feature] / data[population_feature]
     return data
 
+# Function to create growth rates
+def create_growth_rates(data, features):
+    for feature in features:
+        growth_rate = data[feature] / (data[feature].shift(1) + 1) - 1
+        data[f'{feature}_growth_rate'] = growth_rate.fillna(0).replace([np.inf, -np.inf], 0)
+    return data
+
+# Function to select and scale specified features
+def select_and_scale_features(data, selected_features):
+    scaler = StandardScaler()
+    data[selected_features] = scaler.fit_transform(data[selected_features])
+    return data
+
+
 # Main function to perform the steps up to creating lag features
 def perform_feature_engineering(filepath, save_path):
     # Step 1: Load dataset
@@ -59,7 +75,18 @@ def perform_feature_engineering(filepath, save_path):
     # Step 5: Create per capita metrics
     per_capita_features = ['total_cases', 'total_deaths', 'total_tests', 'new_cases', 'new_deaths', 'new_tests']
     data = create_per_capita_metrics(data, per_capita_features, 'population')
+
+    # Step 6: Create growth rates
+    growth_rate_features = ['new_cases', 'new_deaths', 'new_tests']
+    data = create_growth_rates(data, growth_rate_features)
     
+    # Step 7: Select and scale features
+    selected_features = ['new_cases', 'new_deaths', 'new_cases_lag1', 'new_deaths_lag1', 'new_cases_lag7', 'new_deaths_lag7',
+                         'new_cases_7d_avg', 'new_deaths_7d_avg', 'total_cases_per_capita', 'new_cases_per_capita', 
+                         'total_deaths_per_capita', 'new_deaths_per_capita', 'total_tests_per_capita', 'new_tests_per_capita',
+                         'new_cases_growth_rate', 'new_deaths_growth_rate', 'new_tests_growth_rate']
+    data = select_and_scale_features(data, selected_features)
+
     # Fill missing values for lag features
     data.fillna(0, inplace=True)
 
