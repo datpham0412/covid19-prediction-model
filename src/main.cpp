@@ -6,10 +6,10 @@ int main()
     DataProcessor dp;
     try
     {
-        dp.loadCSV("../../data/covid_data_aus.csv", false);
-        dp.loadCSV("../../data/mobility_data_aus.csv", true);
+        dp.loadCSV("../../data/processed/covid_data_aus.csv", false);
+        dp.loadCSV("../../data/processed/mobility_data_aus.csv", true);
         dp.processData();
-        dp.saveToDatabase("../../data/processed_data_aus.db");
+        dp.saveToDatabase("../../data/db/processed_data_aus.db");
     }
     catch (const std::exception &e)
     {
