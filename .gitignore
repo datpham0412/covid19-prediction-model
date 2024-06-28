@@ -54,3 +54,6 @@ SQLiteCpp/build.bat
 # Ignore data files (optional if data files should not be versioned)
 data/*.csv
 data/*.db
+data/processed/
+data/raw/
+data/db/
