@@ -1,11 +1,19 @@
 #include "../include/data_processor.h"
 #include <iostream>
+#include <filesystem>
 
 int main()
 {
-    DataProcessor dp;
     try
     {
+        // Ensure the db directory exists
+        std::filesystem::path db_directory("../../data/db");
+        if (!std::filesystem::exists(db_directory))
+        {
+            std::filesystem::create_directories(db_directory);
+        }
+
+        DataProcessor dp;
         dp.loadCSV("../../data/processed/covid_data_aus.csv", false);
         dp.loadCSV("../../data/processed/mobility_data_aus.csv", true);
         dp.processData();

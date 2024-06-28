@@ -1,5 +1,6 @@
 import sqlite3
 import pandas as pd
+import os
 
 # Function to load data from the SQLite database
 def load_data(db_path):
@@ -46,6 +47,10 @@ def main():
     # Print column names
     print("\nColumn Names:")
     print(merged_data.columns)
+
+    # Ensure the processed directory exists
+    processed_dir = './data/processed'
+    os.makedirs(processed_dir, exist_ok=True)
     
     # Save merged data to a CSV file for EDA
     merged_data.to_csv('../data/processed/merged_data_aus.csv', index=False)
