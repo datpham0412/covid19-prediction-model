@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
@@ -18,13 +19,17 @@ features_with_subregion = data.columns.drop([target])
 X = data[features_with_subregion]
 y = data[target]
 
+# Ensure the directories exist
+os.makedirs('../data/processed/train', exist_ok=True)
+os.makedirs('../data/processed/test', exist_ok=True)
+
 # Perform the train-test split with stratification by 'sub_region_1'
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=data['sub_region_1'])
 
-X_train.to_csv('../data/processed/X_train.csv', index=False)
-X_test.to_csv('../data/processed/X_test.csv', index=False)
-y_train.to_csv('../data/processed/y_train.csv', index=False)
-y_test.to_csv('../data/processed/y_test.csv', index=False)
+X_train.to_csv('../data/processed/train/X_train.csv', index=False)
+X_test.to_csv('../data/processed/test/X_test.csv', index=False)
+y_train.to_csv('../data/processed/train/y_train.csv', index=False)
+y_test.to_csv('../data/processed/test/y_test.csv', index=False)
 
 print("Data has been split and saved successfully.")
 
