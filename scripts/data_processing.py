@@ -33,6 +33,23 @@ def preprocess_data(covid_data, mobility_data):
     # Convert date to datetime
     merged_data['date'] = pd.to_datetime(merged_data['date'])
     
+    # Convert total_cases and total_tests to numeric, coercing errors
+    merged_data['total_cases'] = pd.to_numeric(merged_data['total_cases'], errors='coerce')
+    merged_data['total_tests'] = pd.to_numeric(merged_data['total_tests'], errors='coerce')
+    
+    # Fill NaN values in total_cases and total_tests with 0
+    merged_data['total_cases'].fillna(0, inplace=True)
+    merged_data['total_tests'].fillna(0, inplace=True)
+
+    # Calculate new cases and new tests
+    merged_data = merged_data.sort_values(by=['date'])
+    merged_data['new_cases'] = merged_data['total_cases'].diff().fillna(0)
+    merged_data['new_tests'] = merged_data['total_tests'].diff().fillna(0)
+    
+    # Ensure new_cases and new_tests are non-negative
+    merged_data['new_cases'] = merged_data['new_cases'].apply(lambda x: max(x, 0))
+    merged_data['new_tests'] = merged_data['new_tests'].apply(lambda x: max(x, 0))
+    
     return merged_data
 
 def main():
@@ -49,7 +66,7 @@ def main():
     print(merged_data.columns)
 
     # Ensure the processed directory exists
-    processed_dir = './data/processed'
+    processed_dir = '../data/processed'
     os.makedirs(processed_dir, exist_ok=True)
     
     # Save merged data to a CSV file for EDA

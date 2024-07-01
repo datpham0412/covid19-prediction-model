@@ -1,19 +1,12 @@
-# scripts/model_training.py
-
 import pandas as pd
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
-from sklearn.preprocessing import OneHotEncoder, FunctionTransformer
+from sklearn.preprocessing import OneHotEncoder, FunctionTransformer, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-import joblib
+import dill as pickle
 import os
 
-# Load the training data
-X_train = pd.read_csv('../data/processed/train/X_train.csv')
-y_train = pd.read_csv('../data/processed/train/y_train.csv')
-
-# Define a function to extract date features
+# Define your custom function to extract date features
 def extract_date_features(df):
     df['date'] = pd.to_datetime(df['date'])
     df['year'] = df['date'].dt.year
@@ -21,19 +14,29 @@ def extract_date_features(df):
     df['day'] = df['date'].dt.day
     return df.drop(columns=['date'])
 
-# Apply the date feature extraction
-date_transformer = FunctionTransformer(extract_date_features)
+# Load the training data
+X_train = pd.read_csv('../data/processed/train/X_train.csv')
+y_train = pd.read_csv('../data/processed/train/y_train.csv').squeeze()  # Ensure y_train is a Series
 
-# Identify categorical features
-categorical_features = ['location', 'country_region', 'sub_region_1', 'sub_region_2']
+# Apply the date feature extraction
+date_transformer = FunctionTransformer(extract_date_features, validate=False)
+
+# Identify categorical features and numeric features
+categorical_features = []
+numeric_features = ['total_cases', 'total_deaths', 'total_tests', 'new_deaths', 'new_tests', 'population',
+                    'new_cases_lag1', 'new_cases_lag7', 'new_deaths_lag1', 'new_deaths_lag7',
+                    'new_cases_7d_avg', 'new_deaths_7d_avg', 'new_tests_7d_avg',
+                    'total_cases_per_capita', 'total_deaths_per_capita', 'total_tests_per_capita',
+                    'new_cases_per_capita', 'new_deaths_per_capita', 'new_tests_per_capita',
+                    'new_cases_growth_rate', 'new_deaths_growth_rate', 'new_tests_growth_rate']
 
 # Create a ColumnTransformer to preprocess the data
 preprocessor = ColumnTransformer(
     transformers=[
         ('date', date_transformer, ['date']),
-        ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
+        ('num', StandardScaler(), numeric_features)
     ],
-    remainder='passthrough'  # Leave the rest of the columns unchanged
+    remainder='passthrough'
 )
 
 # Create a pipeline that first transforms the data then fits the model
@@ -48,7 +51,8 @@ model_pipeline.fit(X_train, y_train)
 # Ensure the models directory exists
 os.makedirs('../models', exist_ok=True)
 
-# Save the trained model pipeline
-joblib.dump(model_pipeline, '../models/linear_regression_model.pkl')
+# Save the trained model pipeline using dill
+with open('../models/linear_regression_model.pkl', 'wb') as f:
+    pickle.dump(model_pipeline, f)
 
 print("Model trained and saved successfully.")
