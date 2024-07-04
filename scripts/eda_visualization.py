@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import os
 
 # Function to set display options
 def set_display_options():
@@ -87,8 +88,20 @@ def perform_eda(data):
     reset_display_options()
 
 def main():
+    country_name = input("Enter the country name for EDA: ").lower()
+    processed_dir = '../data/processed'
+
+    # Construct the filename based on the country name
+    merged_filename = f'merged_data_{country_name}.csv'
+    merged_filepath = os.path.join(processed_dir, merged_filename)
+
+    # Check if the file exists
+    if not os.path.exists(merged_filepath):
+        print(f"'{country_name}' data is not found. Please ensure the correct country name and processed data exists.")
+        return
+
     # Load merged data from csv file
-    merged_data = pd.read_csv('../data/processed/merged_data_aus.csv')
+    merged_data = pd.read_csv(merged_filepath)
 
     print("\nMerged data table: ")
     print(merged_data.head())
