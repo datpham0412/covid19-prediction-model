@@ -53,7 +53,13 @@ def preprocess_data(covid_data, mobility_data):
     return merged_data
 
 def main():
-    db_path = '../data/db/processed_data_aus.db'
+    country_name = input("Enter the country name: ").strip().lower()
+    db_filename = f"processed_data_{country_name}.db"
+    db_path = os.path.join('../data/db', db_filename)
+    
+    if not os.path.exists(db_path):
+        print(f"Database for {country_name} not found.")
+        return
     
     covid_data, mobility_data = load_data(db_path)
     merged_data = preprocess_data(covid_data, mobility_data)
@@ -70,8 +76,10 @@ def main():
     os.makedirs(processed_dir, exist_ok=True)
     
     # Save merged data to a CSV file for EDA
-    merged_data.to_csv('../data/processed/merged_data_aus.csv', index=False)
-    print("Merged data saved to '../data/processed/merged_data_aus.csv'")
+    output_filename = f"merged_data_{country_name}.csv"
+    output_path = os.path.join(processed_dir, output_filename)
+    merged_data.to_csv(output_path, index=False)
+    print(f"Merged data saved to '{output_path}'")
 
 if __name__ == "__main__":
     main()
