@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -140,10 +141,14 @@ def ensure_non_negative(data, features):
         raise
 
 # Main function to perform the steps up to creating lag features
-def perform_feature_engineering(filepath, save_path):
+def perform_feature_engineering(country_name):
     try:
+        country_name_lower = country_name.lower()
+        input_file = f'../data/processed/merged_data_{country_name_lower}.csv'
+        output_file = f'../data/processed/feature_engineering_data_{country_name_lower}.csv'
+
         # Step 1: Load dataset
-        data = load_dataset(filepath)
+        data = load_dataset(input_file)
         
         # Step 2: Create date-based features
         data = create_date_features(data)
@@ -186,11 +191,12 @@ def perform_feature_engineering(filepath, save_path):
         data.fillna(0, inplace=True)
 
         # Save the processed data to a new CSV file
-        data.to_csv(save_path, index=False)
-        logging.info(f"Feature engineering completed and saved to {save_path}")
+        data.to_csv(output_file, index=False)
+        logging.info(f"Feature engineering completed and saved to {output_file}")
     except Exception as e:
         logging.error(f"Error in perform_feature_engineering: {e}")
         raise
 
-# Run the feature engineering process
-perform_feature_engineering('../data/processed/merged_data_aus.csv', '../data/processed/feature_engineering_data.csv')
+if __name__ == "__main__":
+    country_name = input("Enter the country name for feature engineering: ")
+    perform_feature_engineering(country_name)
