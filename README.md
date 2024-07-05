@@ -12,43 +12,84 @@ The **Covid 19 Prediction Model** is a comprehensive tool designed to predict th
 ## 🛠 Technologies Used
 
 <p align="left">
-<a href="https://www.python.org/downloads" target="_blank" rel="noreferrer"> 
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> 
-</a>  
-<a href="https://isocpp.org/get-started" target="_blank" rel="noreferrer"> 
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cplusplus" width="40" height="40"/> 
-</a> 
+<a href="
+https://www.python.org/downloads"
+target="_blank" rel="noreferrer">
+<img src="
+https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg"
+alt="python" width="40" height="40"/>
+</a>
+<a href="
+https://www.w3schools.com/cpp/"
+target="_blank" rel="noreferrer">
+<img src="
+https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg"
+alt="cplusplus" width="40" height="40"/>
+</a>
 <a href="
 https://www.sqlite.org/download.html"
-target="_blank" rel="noreferrer"> <img src="
-https://cdn.worldvectorlogo.com/logos/sqlite-1.svg"
-alt="sqlite" width="80" height="40"/> </a>
-<a href="https://pandas.pydata.org/" target="_blank" rel="noreferrer"> 
-  <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*uyUj__HJekKIkx58kMxlcA.png" alt="pandas" width="40" height="40"/> 
-</a> 
-<a href="https://scikit-learn.org/stable/" target="_blank" rel="noreferrer"> 
-  <img src="https://avatars.githubusercontent.com/u/17349883?s=200&v=4" alt="scikit-learn" width="40" height="40"/> 
-</a> 
-<a href="https://matplotlib.org/" target="_blank" rel="noreferrer"> 
-  <img src="https://cdn.phidgets.com/education/wp-content/uploads/2021/04/Matplotlib_icon.png" alt="matplotlib" width="40" height="40"/> 
-</a> 
-<a href="https://seaborn.pydata.org/" target="_blank" rel="noreferrer"> 
-  <img src="https://cdn.worldvectorlogo.com/logos/seaborn-1.svg" alt="seaborn" width="40" height="40"/> 
-</a> 
-<a href="https://cmake.org/" target="_blank" rel="noreferrer"> 
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Cmake.svg/96px-Cmake.svg.png" alt="cmake" width="40" height="40"/> 
-</a> 
-<a href="https://github.com/google/googletest" target="_blank" rel="noreferrer"> 
-  <img src="[https://quizizz.com/media/resource/gs/quizizz-media/quizzes/940f318e-d7e6-4277-ae39-0723d02373c7?w=900&h=900](https://banner2.cleanpng.com/20180423/gkw/kisspng-google-logo-logo-logo-5ade7dc753b015.9317679115245306313428.jpg)" alt="google-test" width="40" height="40"/> 
-</a> 
-<a href="https://pypi.org/project/dill/" target="_blank" rel="noreferrer"> 
-  <img src="https://dill.readthedocs.io/en/latest/_static/pathos.png" alt="dill" width="40" height="40"/> 
-</a> 
-<a href="https://jupyter.org/" target="_blank" rel="noreferrer"> 
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Jupyter_logo.svg/1200px-Jupyter_logo.svg.png" alt="jupyter-notebook" width="40" height="40"/> 
-</a> 
+target="_blank" rel="noreferrer">
+<img src="
+https://upload.wikimedia.org/wikipedia/commons/9/97/Sqlite-square-icon.svg"
+alt="sqlite" width="40" height="40"/>
+</a>
+<a href="
+https://pandas.pydata.org/"
+target="_blank" rel="noreferrer">
+<img src="
+https://miro.medium.com/v2/resize:fit:640/format:webp/1*uyUj__HJekKIkx58kMxlcA.png"
+alt="pandas" width="40" height="40"/>
+</a>
+<a href="
+https://scikit-learn.org/stable/"
+target="_blank" rel="noreferrer">
+<img src="
+https://avatars.githubusercontent.com/u/17349883?s=200&v=4"
+alt="scikit-learn" width="40" height="40"/>
+</a>
+<a href="
+https://matplotlib.org/"
+target="_blank" rel="noreferrer">
+<img src="
+https://cdn.phidgets.com/education/wp-content/uploads/2021/04/Matplotlib_icon.png"
+alt="matplotlib" width="40" height="40"/>
+</a>
+<a href="
+https://seaborn.pydata.org/"
+target="_blank" rel="noreferrer">
+<img src="
+https://cdn.worldvectorlogo.com/logos/seaborn-1.svg"
+alt="seaborn" width="40" height="40"/>
+</a>
+<a href="
+https://cmake.org/"
+target="_blank" rel="noreferrer">
+<img src="
+https://upload.wikimedia.org/wikipedia/commons/1/13/Cmake.svg"
+alt="cmake" width="40" height="40"/>
+</a>
+<a href="
+https://github.com/google/googletest"
+target="_blank" rel="noreferrer">
+<img src="
+https://banner2.cleanpng.com/20180423/gkw/kisspng-google-logo-logo-logo-5ade7dc753b015.9317679115245306313428.jpg"
+alt="google-test" width="40" height="40"/>
+</a>
+<a href="
+https://pypi.org/project/dill/"
+target="_blank" rel="noreferrer">
+<img src="
+https://dill.readthedocs.io/en/latest/_static/pathos.png"
+alt="dill" width="40" height="40"/>
+</a>
+<a href="
+https://jupyter.org/"
+target="_blank" rel="noreferrer">
+<img src="
+https://upload.wikimedia.org/wikipedia/commons/3/38/Jupyter_logo.svg"
+alt="jupyter-notebook" width="40" height="40"/>
+</a>
 </p>
-
 - **Python**: Core programming language for data processing and model training.
 - **C++**: For efficient data processing and handling large datasets.
 - **SQLite**: Database management for storing and querying data.
