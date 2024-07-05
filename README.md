@@ -15,13 +15,13 @@ The **Covid 19 Prediction Model** is a comprehensive tool designed to predict th
 <a href="https://www.python.org/downloads" target="_blank" rel="noreferrer"> 
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> 
 </a>  
-<a href="https://www.w3schools.com/cpp/" target="_blank" rel="noreferrer"> 
+<a href="https://isocpp.org/get-started" target="_blank" rel="noreferrer"> 
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cplusplus" width="40" height="40"/> 
 </a> 
 <a href="
 https://www.sqlite.org/download.html"
 target="_blank" rel="noreferrer"> <img src="
-https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/SQLite370.svg/2560px-SQLite370.svg.png)](https://cdn.worldvectorlogo.com/logos/sqlite-1.svg"
+https://cdn.worldvectorlogo.com/logos/sqlite-1.svg"
 alt="sqlite" width="80" height="40"/> </a>
 <a href="https://pandas.pydata.org/" target="_blank" rel="noreferrer"> 
   <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*uyUj__HJekKIkx58kMxlcA.png" alt="pandas" width="40" height="40"/> 
