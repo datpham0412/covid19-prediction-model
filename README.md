@@ -10,21 +10,6 @@ The **Covid 19 Prediction Model** is a comprehensive tool designed to predict th
 
 ## 🛠 Technologies Used
 
-<p align="left">
-    <img src="![kisspng-python-computer-icons-programming-language-executa-5d0f0aa79779a6 6143656815612668556205](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/0fbb49a5-4519-414b-b778-f8fa3c64a0c3)
-" alt="Python" height="40">
-    <img src="URL_of_CSharp.png" alt="C#" height="40">
-    <img src="URL_of_CSS3.png" alt="CSS3" height="40">
-    <img src="URL_of_HTML5.png" alt="HTML5" height="40">
-    <img src="URL_of_JavaScript.png" alt="JavaScript" height="40">
-    <img src="URL_of_VueJS.png" alt="Vue.js" height="40">
-    <img src="URL_of_MySQL.png" alt="MySQL" height="40">
-    <img src="URL_of_PHP.png" alt="PHP" height="40">
-    <img src="URL_of_Python.png" alt="Python" height="40">
-    <img src="URL_of_React.png" alt="React" height="40">
-    <img src="URL_of_Ruby.png" alt="Ruby" height="40">
-</p>
-
 - **Python**: Core programming language for data processing and model training.
 - **C++**: For efficient data processing and handling large datasets.
 - **SQLite**: Database management for storing and querying data.
