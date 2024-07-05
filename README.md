@@ -11,7 +11,8 @@ The **Covid 19 Prediction Model** is a comprehensive tool designed to predict th
 ## 🛠 Technologies Used
 
 <p align="left">
-    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cleanpng.com%2Fpng-python-computer-icons-programming-language-executa-7247110%2F&psig=AOvVaw1D10z3JS1DGQ0PpguxHHNk&ust=1720232138786000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCJjgp57qjocDFQAAAAAdAAAAABAE" alt="Python" height="40">
+    <img src="![kisspng-python-computer-icons-programming-language-executa-5d0f0aa79779a6 6143656815612668556205](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/0fbb49a5-4519-414b-b778-f8fa3c64a0c3)
+" alt="Python" height="40">
     <img src="URL_of_CSharp.png" alt="C#" height="40">
     <img src="URL_of_CSS3.png" alt="CSS3" height="40">
     <img src="URL_of_HTML5.png" alt="HTML5" height="40">
