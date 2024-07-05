@@ -9,6 +9,7 @@
 The **Covid 19 Prediction Model** is a comprehensive tool designed to predict the spread and impact of Covid-19 using historical data and advanced statistical techniques. The model leverages multiple data sources, including Covid-19 case data and mobility data, to provide accurate forecasts and insights into the pandemic's trends. The project aims to assist policymakers, healthcare professionals, and the general public in understanding and responding to the ongoing Covid-19 crisis.
 
 ## 🛠 Technologies Used
+
 <p align="left">
     <img src="URL_of_C++.png" alt="C++" height="40">
     <img src="URL_of_CSharp.png" alt="C#" height="40">
@@ -22,6 +23,7 @@ The **Covid 19 Prediction Model** is a comprehensive tool designed to predict th
     <img src="URL_of_React.png" alt="React" height="40">
     <img src="URL_of_Ruby.png" alt="Ruby" height="40">
 </p>
+
 - **Python**: Core programming language for data processing and model training.
 - **C++**: For efficient data processing and handling large datasets.
 - **SQLite**: Database management for storing and querying data.
