@@ -94,6 +94,7 @@ This script fetches COVID-19 and mobility data. Note that this may take up to 10
 python scripts/migrate_data.py
 ```
 This script migrates COVID-19 and mobility data for a specified country from the raw datasets to processed CSV files.
+
 3. **Build the project**
 ```sh
 cd ..
@@ -105,10 +106,13 @@ cd Release
 Covid19_Prediction.exe
 ```
 Follow these steps to configure, build, and run the C++ project.
+
 4. **Process Data**
 ```sh
 python scripts/data_processing.py
 ```
+This script processes the COVID-19 and mobility data for a specific country provided by the user.
+
 5. **Perform EDA**
 ```sh
 python scripts/eda_visualization.py
