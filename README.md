@@ -150,6 +150,23 @@ jupyter notebook
 ```
 Open interpret_predictions.ipynb in Jupyter Notebook to visualize and interpret the model's predictions.
 
+## 📷 Screenshots
+![CorrelationHeatMatrix](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/0f403266-8b3d-4c3c-ab27-28e8f5963ce1)
+![JupyterNotebook2](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/da923b42-92c2-493f-84c4-c6d08ffae03d)
+![NewCases_NewDeathsOverTime](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/a51787f3-ef7f-4366-8849-ec641186a30e)
+![CorrelationScatterPlot](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/3f1631c3-b8dc-4c8e-8732-92c6166ac63c)
+![DistributionNewCases](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/59cddbbc-ca2c-4050-9b85-bd045380cac9)
+![JupyterNotebook1](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/dc8a5a02-ab51-4044-98dc-4f17bd901111)
+![JupyterNotebook2](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/49d71df3-e149-4238-919c-c7791d5420f3)
+![JupyterNotebook3](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/b1db4032-039b-49c5-b804-4a8a780bcca4)
+![JupyterNotebook4](https://github.com/datpham0412/Covid19_Prediction_Model/assets/100574389/787fbf82-9a6e-430c-83b7-e474e8af2eff)
+
+
+## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/datpham0412/Covid19_Prediction_Model/blob/main/LICENSE)) file for details.
+
+## 📞 Contact
+For any inquiries, please contact [tiendat041202@gmail.com](mailto:tiendat041202@gmail.com).
 ---
 
 
