@@ -29,7 +29,126 @@ The **Covid 19 Prediction Model** is a comprehensive tool designed to predict th
 - Generate detailed reports and visualizations for data exploration and model results.
 - Support for user-defined country data extraction and analysis.
 
+## 🚀 Installation and Running the Project
+### Prerequisites
+- Ensure you have `git` installed for cloning repositories.
+- Ensure you have CMake installed and added to your system's PATH.
+
+### Steps
+1. **Clone the Repository**:
+    ```sh
+    git clone https://github.com/yourusername/Covid19_Prediction_Model.git
+    cd Covid19_Prediction_Model
+    ```
+
+2. **Install CMake**:
+    - Download CMake from [here](https://github.com/Kitware/CMake/releases/download/v3.30.0-rc3/cmake-3.30.0-rc3-windows-x86_64.msi)
+    - Add the CMake binary path (e.g., `C:\Program Files\CMake\bin`) to your environment variables.
+
+3. **Clone SQLiteCpp**:
+    ```sh
+    cd external
+    git clone https://github.com/SRombauts/SQLiteCpp.git
+    ```
+
+4. **Modify SQLiteCpp CMakeLists.txt**:
+    - Open `CMakeLists.txt` in the `external/SQLiteCpp` folder.
+    - Change line 388 from:
+      ```cmake
+      option(SQLITECPP_RUN_CPPLINT "Run cpplint.py tool for Google C++ StyleGuide." ON)
+      ```
+      to:
+      ```cmake
+      option(SQLITECPP_RUN_CPPLINT "Run cpplint.py tool for Google C++ StyleGuide." OFF)
+      ```
+
+5. **Build the Project**:
+    ```sh
+    cd ..
+    mkdir build
+    cd build
+    cmake ..
+    cmake --build . --config Release
+    ```
+
+6. **Run the Application**:
+    ```sh
+    cd Release
+    Covid19_Prediction.exe
+    ```
+
+### Python Dependencies
+Install the required Python libraries:
+```sh
+pip install pandas numpy scikit-learn sqlite3 matplotlib seaborn dill joblib notebook
+```
+## Running the scripts
+1. **Fetch Data**
+```sh
+python scripts/fetch_data.py
+```
+This script fetches COVID-19 and mobility data. Note that this may take up to 10-20 minutes.
+
+2. **Migrate Data**
+```sh
+python scripts/migrate_data.py
+```
+This script migrates COVID-19 and mobility data for a specified country from the raw datasets to processed CSV files.
+3. **Build the project**
+```sh
+cd ..
+mkdir build
+cd build
+cmake ..
+cmake --build . --config Release
+cd Release
+Covid19_Prediction.exe
+```
+Follow these steps to configure, build, and run the C++ project.
+4. **Process Data**
+```sh
+python scripts/data_processing.py
+```
+5. **Perform EDA**
+```sh
+python scripts/eda_visualization.py
+```
+This script performs Exploratory Data Analysis on the processed data.
+
+6. **Feature Engineering**
+```sh
+python scripts/feature_engineering.py
+```
+This script performs feature engineering on the processed data.
+
+7. **Split Data**
+```sh
+python scripts/split_data.py
+```
+This script splits the data into training and testing sets.
+
+8. **Model Training**
+```sh
+python scripts/model_training.py
+```
+This script trains the machine learning model.
+
+9. **Model Evaluation**
+```sh
+python scripts/model_evaluation.py
+```
+This script evaluates the performance of the trained model.
+
+10. **Interpret Predictions**
+```sh
+cd notebooks
+jupyter notebook
+```
+Open interpret_predictions.ipynb in Jupyter Notebook to visualize and interpret the model's predictions.
+
 ---
+
+
 
 Made with ❤️ by [Dat Pham](https://github.com/datpham0412)
  
