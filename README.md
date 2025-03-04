@@ -91,7 +91,7 @@ The **Covid 19 Prediction Model** is a comprehensive tool designed to predict th
 1. **Clone the Repository**:
 
    ```sh
-   git clone https://github.com/yourusername/Covid19_Prediction_Model.git
+   git clone https://github.com/datpham0412/Covid19_Prediction_Model.git
    cd Covid19_Prediction_Model
    ```
 
